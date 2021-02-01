@@ -1,4 +1,4 @@
 def handler(event, context):
-    print("Welcome to lambda handler.")
+    print("Welcome to updated lambda handler.")
 
-    return {"action": "handler_executed"}
+    return {"action": "update_handler_executed"}
