@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "virtual-env/bin/python",
+    "python.venvPath": "virtual-env"
+}
