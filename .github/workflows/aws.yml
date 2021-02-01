@@ -50,7 +50,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push outofthebox image to Amazon ECR
       id: build-outofthebox-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -64,7 +64,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
     
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push custom image to Amazon ECR
       id: build-custom-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -85,7 +85,7 @@ jobs:
       run: |
         aws lambda update-function-code --function-name arn:aws:lambda:us-east-2:179627968749:function:function-outofthebox-image --image-uri $IMAGE_URI
         
-    - name: Update aws outofthebox lambda function code
+    - name: Update aws custom lambda function code
       id: update-custom-function-code
       env: 
         IMAGE_URI: ${{ steps.build-custom-image.outputs.image }}
